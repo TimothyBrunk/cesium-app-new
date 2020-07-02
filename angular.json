@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/cesium-app-new",
             "index": "src/index.html",
@@ -20,8 +20,13 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              "src/assets",
               "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "./node_modules/cesium/Build/Cesium",
+                "output": "./assets/cesium"
+              }
             ],
             "styles": [
               "src/styles.css"
@@ -60,7 +65,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "cesium-app-new:build"
           },
